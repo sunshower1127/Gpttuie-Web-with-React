@@ -8,11 +8,11 @@ export default function useRefresh() {
     const handleTouchEnd = () => {
       if (window.scrollY < -50) {
         setRefreshing(true);
+        setTimeout(() => {
+          setRefreshing(false);
+          window.location.reload();
+        }, 500);
       }
-      setTimeout(() => {
-        setRefreshing(false);
-        window.location.reload();
-      }, 500);
     };
 
     window.addEventListener("touchend", handleTouchEnd);
