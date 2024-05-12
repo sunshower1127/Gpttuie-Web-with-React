@@ -4,6 +4,9 @@ import reset from "styled-reset";
 import Home from "./routes/home";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create-account";
+import ProtectedRoute from "./components/protected-route";
+import CreatePost from "./routes/create-post";
+import Profile from "./routes/profile";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,23 @@ const router = createBrowserRouter([
   {
     path: "/create-account",
     element: <CreateAccount />,
+  },
+
+  {
+    path: "/create-post",
+    element: (
+      <ProtectedRoute>
+        <CreatePost />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
