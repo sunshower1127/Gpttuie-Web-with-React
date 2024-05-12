@@ -5,12 +5,13 @@ import { User } from "firebase/auth";
 
 export default function ProtectedRoute({
   children,
+  path,
 }: {
   children: React.ReactNode;
+  path: string;
 }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -26,7 +27,7 @@ export default function ProtectedRoute({
   }
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" state={{ from: path }} />;
   }
 
   return children;

@@ -25,7 +25,7 @@ const router = createBrowserRouter([
   {
     path: "/create-post",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute path="/create-post">
         <CreatePost />
       </ProtectedRoute>
     ),
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute path="/profile">
         <Profile />
       </ProtectedRoute>
     ),

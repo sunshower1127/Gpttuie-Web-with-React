@@ -1,12 +1,13 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../components/firebase";
 import { FirebaseError } from "firebase/app";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +28,7 @@ export default function Login() {
     try {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate(location.state?.from || "/", { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) setError(error.message);
     } finally {

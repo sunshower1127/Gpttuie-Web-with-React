@@ -11,10 +11,13 @@ import {
   where,
 } from "firebase/firestore";
 import PostCard from "../components/postcard";
+import { Link } from "react-router-dom";
+import useRefresh from "../hooks/useRefresh";
 
 export default function Profile() {
   const user = auth.currentUser;
   const [posts, setPosts] = useState<IPost[]>([]);
+  const { isRefreshing, LoadingIndicator } = useRefresh();
 
   const fetchPosts = async () => {
     if (!user) return;
@@ -38,6 +41,10 @@ export default function Profile() {
 
   return (
     <Wrapper>
+      {isRefreshing && <LoadingIndicator />}
+      <Title>Profile</Title>
+      <Link to="/">Home</Link>
+      <Text>{user?.displayName}님이 쓴 글</Text>
       {posts.map((post) => (
         <PostCard
           key={post.id}
@@ -54,4 +61,14 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 1rem;
+`;
+
+const Text = styled.p`
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 `;
