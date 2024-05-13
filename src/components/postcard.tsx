@@ -36,6 +36,10 @@ const CardWrapper = styled.div`
   overflow: hidden;
   width: 300px;
   margin: 10px 40px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
 `;
 
 const Image = styled.img`

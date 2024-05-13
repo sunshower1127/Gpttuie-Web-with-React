@@ -1,10 +1,11 @@
-import { DocumentData, doc, getDoc } from "firebase/firestore";
-import { Link, useParams } from "react-router-dom";
-import { db } from "../components/firebase";
+import { DocumentData, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { auth, db } from "../components/firebase";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export default function RecipeViewer() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState<DocumentData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,15 @@ export default function RecipeViewer() {
     fetchData();
   }, []);
 
+  const handleDeleteBtn = async () => {
+    if (!id) return;
+
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      await deleteDoc(doc(db, "posts", id));
+      navigate("/");
+    }
+  };
+
   return (
     <Wrapper>
       <Link to="/">Home</Link>
@@ -40,6 +50,9 @@ export default function RecipeViewer() {
           <Author>By {post?.username}</Author>
           <Image src={post?.photo} alt={post?.title} />
           <Body>{post?.body}</Body>
+          {auth.currentUser?.uid === post?.userId && (
+            <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
+          )}
         </PostWrapper>
       )}
     </Wrapper>
@@ -82,4 +95,18 @@ const Image = styled.img`
 const Body = styled.p`
   font-size: 18px;
   font-weight: normal;
+`;
+
+const DeleteBtn = styled.button`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
 `;

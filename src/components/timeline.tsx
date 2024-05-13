@@ -36,29 +36,26 @@ export default function Timeline() {
   }, []);
 
   return (
-    <PreWrapper>
-      <Wrapper>
-        {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            id={post.id}
-            image={post.photo}
-            title={post.title}
-            author={post.username}
-          />
-        ))}
-      </Wrapper>
-    </PreWrapper>
+    <Wrapper>
+      {posts.map((post) => (
+        <PostCard
+          key={post.id}
+          id={post.id}
+          image={post.photo}
+          title={post.title}
+          author={post.username}
+        />
+      ))}
+    </Wrapper>
   );
 }
 
-const PreWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: fit-content;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
