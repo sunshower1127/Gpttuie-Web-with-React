@@ -35,6 +35,7 @@ const CardWrapper = styled.div`
   border-radius: 4px;
   overflow: hidden;
   width: 300px;
+  margin: 10px 40px;
 `;
 
 const Image = styled.img`
