@@ -1,16 +1,24 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function PostCard({
   image,
   title,
   author,
+  id,
 }: {
   image?: string;
   title: string;
   author: string;
+  id: string;
 }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/recipes/${id}`);
+  };
+
   return (
-    <CardWrapper>
+    <CardWrapper onClick={handleClick}>
       <Image src={image} alt={title} />
       <Content>
         <Title>{title}</Title>

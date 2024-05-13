@@ -11,10 +11,11 @@ import {
   where,
 } from "firebase/firestore";
 import PostCard from "../components/postcard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useRefresh from "../hooks/useRefresh";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const user = auth.currentUser;
   const [posts, setPosts] = useState<IPost[]>([]);
   const { isRefreshing, LoadingIndicator } = useRefresh();
@@ -39,15 +40,25 @@ export default function Profile() {
     fetchPosts();
   }, []);
 
+  const handleLogout = async () => {
+    const ok = confirm("로그아웃 하시겠습니까?");
+    if (ok) {
+      await auth.signOut();
+      navigate("/login");
+    }
+  };
+
   return (
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
       <Title>Profile</Title>
+      <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
       <Link to="/">Home</Link>
       <Text>{user?.displayName}님이 쓴 글</Text>
       {posts.map((post) => (
         <PostCard
           key={post.id}
+          id={post.id}
           image={post.photo}
           title={post.title}
           author={post.username}
@@ -61,6 +72,21 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+`;
+
+const LogoutBtn = styled.button`
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #555;
+  }
 `;
 
 const Title = styled.h1`

@@ -40,6 +40,7 @@ export default function Timeline() {
       {posts.map((post) => (
         <PostCard
           key={post.id}
+          id={post.id}
           image={post.photo}
           title={post.title}
           author={post.username}
@@ -51,6 +52,8 @@ export default function Timeline() {
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 10px;
-  flex-direction: column;
+  gap: 100px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
