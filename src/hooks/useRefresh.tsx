@@ -6,12 +6,12 @@ export default function useRefresh() {
 
   useEffect(() => {
     const handleTouchEnd = () => {
-      if (window.scrollY < -50) {
+      if (window.scrollY < -100) {
         setRefreshing(true);
         setTimeout(() => {
           setRefreshing(false);
           window.location.reload();
-        }, 500);
+        }, 200);
       }
     };
 
