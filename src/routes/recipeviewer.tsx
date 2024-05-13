@@ -1,5 +1,5 @@
 import { DocumentData, deleteDoc, doc, getDoc } from "firebase/firestore";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../components/firebase";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -33,13 +33,13 @@ export default function RecipeViewer() {
 
     if (window.confirm("정말 삭제하시겠습니까?")) {
       await deleteDoc(doc(db, "posts", id));
-      navigate("/");
+      navigate(-1);
     }
   };
 
   return (
     <Wrapper>
-      <Link to="/">Home</Link>
+      <BackBtn onClick={() => navigate(-1)}>Back</BackBtn>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : post === null ? (
@@ -102,6 +102,20 @@ const DeleteBtn = styled.button`
   font-weight: bold;
   padding: 10px;
   background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
+const BackBtn = styled.button`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #333;
   color: white;
   border: none;
   border-radius: 4px;
