@@ -41,12 +41,6 @@ export default function PostViewer() {
     }
   };
 
-  const handleDownloadBtn = () => {
-    // post.recipe를 JSON.stringify하여 react-native-webview로 전달
-    const recipe = JSON.stringify(post?.recipe);
-    window.ReactNativeWebView?.postMessage(recipe);
-  };
-
   return (
     <Wrapper>
       <Helmet>
@@ -73,7 +67,8 @@ export default function PostViewer() {
           <Image src={post?.photo} alt={post?.title} />
           <Body>{post?.body}</Body>
           <RecipeViewer recipe={post?.recipe} />
-          <DownloadBtn onClick={handleDownloadBtn}>Download</DownloadBtn>
+          <DownloadBtn recipe={post?.recipe} />
+          <ShareBtn title={post?.title} id={id} username={post?.username} />
           {auth.currentUser?.uid === post?.userId && (
             <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
           )}
@@ -146,19 +141,5 @@ const BackBtn = styled.button`
   cursor: pointer;
   :hover {
     opacity: 0.8;
-  }
-`;
-
-const DownloadBtn = styled.button`
-  padding: 10px 20px;
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
   }
 `;

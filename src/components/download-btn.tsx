@@ -1,21 +1,29 @@
 import styled from "styled-components";
+import { Recipe } from "./recipe";
 
-export default function DownloadBtn({ id }: { id: any }) {
+export default function DownloadBtn({
+  recipe,
+}: {
+  recipe: Recipe | null | undefined;
+}) {
   const handleClick = () => {
-    window.ReactNativeWebView?.postMessage(`this message is from web : ${id}`);
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({ type: "Recipe", data: recipe })
+    );
   };
   return <Btn onClick={handleClick}>Download</Btn>;
 }
 
 const Btn = styled.button`
-  background-color: #008cba;
-  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
