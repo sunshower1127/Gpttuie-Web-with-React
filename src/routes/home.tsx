@@ -10,7 +10,10 @@ export default function Home() {
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
       <Title>GPTTUIE</Title>
-      <Link to="/create-post">Create Post</Link>
+      <Menu>
+        <Link to="/create-post">Create Post</Link>
+        <Link to="/profile">Profile</Link>
+      </Menu>
       <PostCard title="오늘의 추천 레시피" author="User 1" id="has no id" />
       <Timeline />
     </Wrapper>
@@ -28,4 +31,13 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 1rem;
+`;
+
+const Menu = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

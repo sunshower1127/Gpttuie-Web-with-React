@@ -6,12 +6,12 @@ export default function useRefresh() {
 
   useEffect(() => {
     const handleTouchEnd = () => {
-      if (window.scrollY < -50) {
+      if (window.scrollY < -100) {
         setRefreshing(true);
         setTimeout(() => {
           setRefreshing(false);
           window.location.reload();
-        }, 500);
+        }, 200);
       }
     };
 
@@ -29,10 +29,10 @@ const spin = keyframes`
 `;
 
 const LoadingIndicator = styled.div`
-  border: 8px solid #f3f3f3; // 크기를 반으로 줄임
-  border-top: 8px solid #000000; // 색상을 검은색으로 변경
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #000000;
   border-radius: 50%;
-  width: 60px; // 크기를 반으로 줄임
-  height: 60px; // 크기를 반으로 줄임
+  width: 60px;
+  height: 60px;
   animation: ${spin} 2s linear infinite;
 `;

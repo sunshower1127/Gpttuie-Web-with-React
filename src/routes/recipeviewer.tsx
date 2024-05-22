@@ -1,6 +1,6 @@
-import { DocumentData, doc, getDoc } from "firebase/firestore";
-import { Link, useParams } from "react-router-dom";
-import { db } from "../components/firebase";
+import { DocumentData, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { useNavigate, useParams } from "react-router-dom";
+import { auth, db } from "../components/firebase";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ShareBtn from "../components/share-btn";
@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import DownloadBtn from "../components/download-btn";
 
 export default function RecipeViewer() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState<DocumentData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +31,15 @@ export default function RecipeViewer() {
     fetchData();
   }, []);
 
+  const handleDeleteBtn = async () => {
+    if (!id) return;
+
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      await deleteDoc(doc(db, "posts", id));
+      navigate(-1);
+    }
+  };
+
   return (
     <Wrapper>
       <Helmet>
@@ -43,7 +53,7 @@ export default function RecipeViewer() {
           content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTzYCcyDc3f0J6j3KVFhOFgoU9OxvIWH5gvQ&usqp=CAU"
         />
       </Helmet>
-      <Link to="/">Home</Link>
+      <BackBtn onClick={() => navigate(-1)}>Back</BackBtn>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : post === null ? (
@@ -55,8 +65,6 @@ export default function RecipeViewer() {
 
           <Image src={post?.photo} alt={post?.title} />
           <Body>{post?.body}</Body>
-          <ShareBtn id={id} title={post?.title} username={post?.username} />
-          {window.ReactNativeWebView && <DownloadBtn id={id} />}
         </PostWrapper>
       )}
     </Wrapper>
@@ -99,4 +107,32 @@ const Image = styled.img`
 const Body = styled.p`
   font-size: 18px;
   font-weight: normal;
+`;
+
+const DeleteBtn = styled.button`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
+const BackBtn = styled.button`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
 `;

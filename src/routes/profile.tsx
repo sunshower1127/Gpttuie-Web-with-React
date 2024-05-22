@@ -44,7 +44,7 @@ export default function Profile() {
     const ok = confirm("로그아웃 하시겠습니까?");
     if (ok) {
       await auth.signOut();
-      navigate("/login");
+      navigate("/profile");
     }
   };
 
@@ -72,6 +72,7 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+  align-items: center;
 `;
 
 const LogoutBtn = styled.button`
