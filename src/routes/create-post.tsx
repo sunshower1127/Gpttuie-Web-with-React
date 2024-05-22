@@ -1,21 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, db } from "../components/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import styled from "styled-components";
+import { Recipe } from "../components/recipe";
 
 export default function CreatePost() {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (!event.data) return;
+      const { type, data }: { type: string; data: Recipe } = JSON.parse(
+        event.data
+      );
+      if (type !== "Recipe") return;
+      setTitle(data.title);
+      setRecipe(data);
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "title") {
       setTitle(e.target.value);
     } else if (e.target.name === "body") {
       setBody(e.target.value);
-    } else if (e.target.name === "photo") {
-      setPhoto(e.target.value);
     }
   };
 
@@ -36,14 +54,14 @@ export default function CreatePost() {
       /*const doc = */ await addDoc(collection(db, "posts"), {
         title,
         body,
-        photo,
+        photo: recipe?.steps[recipe.steps.length - 1].image,
         userId: user.uid,
         username: user.displayName,
         createdAt: Date.now(),
+        recipe,
       });
       setTitle("");
       setBody("");
-      setPhoto("");
     } catch (error) {
       console.error(error);
     } finally {
@@ -67,13 +85,6 @@ export default function CreatePost() {
           name="body"
           placeholder="Body"
           value={body}
-          onChange={onChange}
-        />
-        <Input
-          type="text"
-          name="photo"
-          placeholder="Photo URL"
-          value={photo}
           onChange={onChange}
         />
         <Button type="submit" disabled={isLoading}>

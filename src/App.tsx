@@ -8,7 +8,7 @@ import ProtectedRoute from "./components/protected-route";
 import CreatePost from "./routes/create-post";
 import Profile from "./routes/profile";
 import Recipes from "./routes/recipes";
-import RecipeViewer from "./routes/recipeviewer";
+import PostViewer from "./routes/postviewer";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/recipes/:id",
-    element: <RecipeViewer />,
+    element: <PostViewer />,
   },
 ]);
 

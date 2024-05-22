@@ -11,7 +11,6 @@ export default function Home() {
       {isRefreshing && <LoadingIndicator />}
       <Title>GPTTUIE</Title>
       <Menu>
-        <Link to="/create-post">Create Post</Link>
         <Link to="/profile">Profile</Link>
       </Menu>
       <PostCard title="오늘의 추천 레시피" author="User 1" id="has no id" />
