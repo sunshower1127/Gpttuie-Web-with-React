@@ -6,19 +6,38 @@ import { Recipe } from "../components/recipe";
 
 export default function CreatePost() {
   const [isLoading, setIsLoading] = useState(false);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
+  const [log, setLog] = useState<string>("");
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    const handleMessage = async (event: MessageEvent) => {
       if (!event.data) return;
-      const { type, data }: { type: string; data: Recipe } = JSON.parse(
+      const { name, data }: { name: string; data: Recipe } = JSON.parse(
         event.data
       );
-      if (type !== "Recipe") return;
-      setTitle(data.title);
-      setRecipe(data);
+      const recipe = data;
+      if (name !== "Recipe") return;
+
+      const user = auth.currentUser;
+      if (!user) return;
+      try {
+        setIsLoading(true);
+        /*const doc = */ await addDoc(collection(db, "posts"), {
+          title,
+          body,
+          photo: recipe?.steps[recipe.steps.length - 1].image || "",
+          userId: user.uid,
+          username: user.displayName,
+          createdAt: Date.now(),
+          recipe,
+        });
+        window.ReactNativeWebView.postMessage("posted");
+      } catch (error: any) {
+        setLog((cur) => cur + "\n" + error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     window.addEventListener("message", handleMessage);
@@ -27,7 +46,7 @@ export default function CreatePost() {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, []);
+  }, [title, body]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "title") {
@@ -46,27 +65,12 @@ export default function CreatePost() {
       !title.trim() ||
       !body.trim() ||
       body.length > 200
-    )
+    ) {
+      alert("제목과 내용을 입력해주세요.");
       return;
-
-    try {
-      setIsLoading(true);
-      /*const doc = */ await addDoc(collection(db, "posts"), {
-        title,
-        body,
-        photo: recipe?.steps[recipe.steps.length - 1].image,
-        userId: user.uid,
-        username: user.displayName,
-        createdAt: Date.now(),
-        recipe,
-      });
-      setTitle("");
-      setBody("");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
     }
+
+    window.ReactNativeWebView.postMessage("submit");
   };
 
   return (
@@ -91,6 +95,7 @@ export default function CreatePost() {
           {isLoading ? "Loading..." : "Create Post"}
         </Button>
       </Form>
+      <Log>{log}</Log>
     </Wrapper>
   );
 }
@@ -121,4 +126,8 @@ const Button = styled.button`
   color: #fff;
   border: none;
   cursor: pointer;
+`;
+
+const Log = styled.div`
+  width: 200px;
 `;
