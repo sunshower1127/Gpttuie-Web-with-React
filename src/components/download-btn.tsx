@@ -8,7 +8,7 @@ export default function DownloadBtn({
 }) {
   const handleClick = () => {
     window.ReactNativeWebView?.postMessage(
-      JSON.stringify({ type: "Recipe", data: recipe })
+      JSON.stringify({ name: "Recipe", data: recipe })
     );
   };
   return <Btn onClick={handleClick}>Download</Btn>;

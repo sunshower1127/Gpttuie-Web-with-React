@@ -1,4 +1,11 @@
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import styled from "styled-components";
@@ -14,26 +21,35 @@ export interface IPost {
   createdAt: number;
 }
 
-export default function Timeline() {
+export default function Timeline({ search }: { search?: string }) {
   const [posts, setPosts] = useState<IPost[]>([]);
 
-  const fetchPosts = async () => {
-    const postsQuery = query(
-      collection(db, "posts"),
-      orderBy("createdAt", "desc"),
-      limit(10)
-    );
-    const postsSnapshot = await getDocs(postsQuery);
-    const postsData = postsSnapshot.docs.map((doc) => {
-      const { title, body, photo, userId, username, createdAt } = doc.data();
-      return { id: doc.id, title, body, photo, userId, username, createdAt };
-    });
-    setPosts(postsData);
-  };
-
   useEffect(() => {
+    const fetchPosts = async () => {
+      const postsQuery = search
+        ? query(
+            collection(db, "posts"),
+            where("title", ">=", search),
+            where("title", "<=", search + "\uf8ff"),
+            orderBy("createdAt", "desc"),
+            limit(20)
+          )
+        : query(
+            collection(db, "posts"),
+            orderBy("createdAt", "desc"),
+            limit(20)
+          );
+
+      const postsSnapshot = await getDocs(postsQuery);
+      const postsData = postsSnapshot.docs.map((doc) => {
+        const { title, body, photo, userId, username, createdAt } = doc.data();
+        return { id: doc.id, title, body, photo, userId, username, createdAt };
+      });
+      setPosts(postsData);
+    };
+
     fetchPosts();
-  }, []);
+  }, [search]);
 
   return (
     <Wrapper>

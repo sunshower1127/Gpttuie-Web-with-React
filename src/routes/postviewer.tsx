@@ -7,6 +7,7 @@ import ShareBtn from "../components/share-btn";
 import { Helmet } from "react-helmet";
 import DownloadBtn from "../components/download-btn";
 import RecipeViewer from "../components/recipeviewer";
+import CommentViewer from "../components/comment-viewer";
 
 export default function PostViewer() {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ export default function PostViewer() {
           {auth.currentUser?.uid === post?.userId && (
             <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
           )}
+          <CommentViewer comments={post?.comments} />
         </PostWrapper>
       )}
     </Wrapper>
