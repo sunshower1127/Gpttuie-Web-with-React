@@ -31,6 +31,7 @@ export default function CreatePost() {
           username: user.displayName,
           createdAt: Date.now(),
           recipe,
+          comments: [],
         });
         window.ReactNativeWebView.postMessage("posted");
       } catch (error: any) {

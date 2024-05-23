@@ -73,7 +73,7 @@ export default function PostViewer() {
           {auth.currentUser?.uid === post?.userId && (
             <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
           )}
-          <CommentViewer comments={post?.comments} />
+          {id && <CommentViewer id={id} comments={post?.comments} />}
         </PostWrapper>
       )}
     </Wrapper>
