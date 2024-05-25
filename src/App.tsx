@@ -9,6 +9,7 @@ import CreatePost from "./routes/create-post";
 import Profile from "./routes/profile";
 import Recipes from "./routes/recipes";
 import PostViewer from "./routes/postviewer";
+import myTheme from "./constants/myTheme";
 
 const router = createBrowserRouter([
   {
@@ -65,10 +66,11 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+  background-color: ${myTheme.colors.surface};
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  /* height: 100vh; */
+  height: 100vh;
   justify-content: center;
 `;

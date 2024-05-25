@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import styled from "styled-components";
 import PostCard from "./postcard";
+import { Recipe } from "./recipe";
 
 export interface IPost {
   id: string;
@@ -19,6 +20,7 @@ export interface IPost {
   userId: string;
   username: string;
   createdAt: number;
+  recipe: Recipe;
 }
 
 export default function Timeline({ search }: { search?: string }) {
@@ -42,8 +44,18 @@ export default function Timeline({ search }: { search?: string }) {
 
       const postsSnapshot = await getDocs(postsQuery);
       const postsData = postsSnapshot.docs.map((doc) => {
-        const { title, body, photo, userId, username, createdAt } = doc.data();
-        return { id: doc.id, title, body, photo, userId, username, createdAt };
+        const { title, body, photo, userId, username, createdAt, recipe } =
+          doc.data();
+        return {
+          id: doc.id,
+          title,
+          body,
+          photo,
+          userId,
+          username,
+          createdAt,
+          recipe,
+        };
       });
       setPosts(postsData);
     };
@@ -60,6 +72,9 @@ export default function Timeline({ search }: { search?: string }) {
           image={post.photo}
           title={post.title}
           author={post.username}
+          body={post.body}
+          rating={post.recipe.rating}
+          review={post.recipe.oneLineReview}
         />
       ))}
     </Wrapper>

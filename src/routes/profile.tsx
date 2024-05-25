@@ -30,8 +30,18 @@ export default function Profile() {
     );
     const postsSnapshot = await getDocs(postsQuery);
     const postsData = postsSnapshot.docs.map((doc) => {
-      const { title, body, photo, userId, username, createdAt } = doc.data();
-      return { id: doc.id, title, body, photo, userId, username, createdAt };
+      const { title, body, photo, userId, username, createdAt, recipe } =
+        doc.data();
+      return {
+        id: doc.id,
+        title,
+        body,
+        photo,
+        userId,
+        username,
+        createdAt,
+        recipe,
+      };
     });
     setPosts(postsData);
   };

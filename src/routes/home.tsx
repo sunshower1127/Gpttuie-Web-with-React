@@ -3,6 +3,7 @@ import PostCard from "../components/postcard";
 import Timeline from "../components/timeline";
 import { Link } from "react-router-dom";
 import useRefresh from "../hooks/useRefresh";
+import myTheme from "../constants/myTheme";
 
 export default function Home() {
   const { isRefreshing, LoadingIndicator } = useRefresh();
@@ -13,7 +14,9 @@ export default function Home() {
       <Menu>
         <Link to="/profile">Profile</Link>
       </Menu>
-      <PostCard title="오늘의 추천 레시피" author="User 1" id="has no id" />
+      <SubTitle>에디터가 직접고른! 오늘의 레시피</SubTitle>
+      <PostCard title="김치찌개" author="에디터" id="has no id" />
+      <SubTitle>최신 요리 후기</SubTitle>
       <Timeline />
     </Wrapper>
   );
@@ -25,11 +28,22 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 1rem;
   width: 100%;
+  background-color: ${myTheme.colors.background};
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 1rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const SubTitle = styled.h2`
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: ${myTheme.colors.primary};
 `;
 
 const Menu = styled.div`
