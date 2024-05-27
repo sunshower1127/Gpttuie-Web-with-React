@@ -28,7 +28,7 @@ export default function Login() {
     try {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate(location.state?.from || "/", { replace: true });
+      navigate(location.state?.from || "/profile", { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) setError(error.message);
     } finally {

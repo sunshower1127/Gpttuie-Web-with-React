@@ -11,13 +11,14 @@ export default function CreatePost() {
   const [log, setLog] = useState<string>("");
 
   useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
+    const handleMessage = async (event: any) => {
       if (!event.data) return;
       const { name, data }: { name: string; data: Recipe } = JSON.parse(
         event.data
       );
-      const recipe = data;
+
       if (name !== "Recipe") return;
+      const recipe = data;
 
       const user = auth.currentUser;
       if (!user) return;
@@ -35,17 +36,19 @@ export default function CreatePost() {
         });
         window.ReactNativeWebView.postMessage("posted");
       } catch (error: any) {
-        setLog((cur) => cur + "\n" + error.message);
+        setLog((cur) => cur + "\nError: " + error.message);
       } finally {
         setIsLoading(false);
       }
     };
 
-    window.addEventListener("message", handleMessage);
-
+    const receiver = navigator.userAgent.includes("Android")
+      ? document
+      : window;
+    receiver.addEventListener("message", handleMessage);
     // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
     return () => {
-      window.removeEventListener("message", handleMessage);
+      receiver.removeEventListener("message", handleMessage);
     };
   }, [title, body]);
 

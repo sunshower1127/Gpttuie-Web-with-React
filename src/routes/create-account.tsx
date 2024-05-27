@@ -34,7 +34,7 @@ export default function CreateAccount() {
         password
       );
       await updateProfile(credentials.user, { displayName: name });
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       if (error instanceof FirebaseError) setError(error.message);
     } finally {
