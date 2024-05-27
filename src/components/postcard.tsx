@@ -52,7 +52,6 @@ const CardWrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   width: 320px;
-  margin: 1rem;
   cursor: pointer;
   :hover {
     opacity: 0.8;

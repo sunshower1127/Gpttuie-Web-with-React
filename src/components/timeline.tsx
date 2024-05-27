@@ -85,7 +85,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
+  gap: 0.5rem;
   @media (max-width: 768px) {
     justify-content: center;
   }

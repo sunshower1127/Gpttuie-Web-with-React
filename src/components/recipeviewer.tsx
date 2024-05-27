@@ -10,8 +10,9 @@ export default function RecipeViewer({
   return (
     <Wrapper>
       <Title>레시피</Title>
-      <Text>{recipe.title}</Text>
-      <Text>{recipe.servingSize}인분 기준</Text>
+      <Text>
+        {recipe.title} {recipe.servingSize}인분
+      </Text>
       <Text>{recipe.country}</Text>
       <Title>재료</Title>
       <List>
@@ -45,8 +46,8 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   font-size: 24px;
-  color: #333;
   margin-bottom: 10px;
+  margin-top: 1rem;
 `;
 
 const Text = styled.p`
@@ -62,11 +63,14 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 60%;
   height: auto;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;

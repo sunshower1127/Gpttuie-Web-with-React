@@ -62,9 +62,7 @@ export default function CommentViewer({
               <Body>{comment.body}</Body>
             </CommentInnerWrapper>
             {user?.uid === comment.userId && (
-              <DeleteBtn onClick={() => handleDeleteBtn(index)}>
-                Delete
-              </DeleteBtn>
+              <DeleteBtn onClick={() => handleDeleteBtn(index)}>X</DeleteBtn>
             )}
           </Comment>
         ))}

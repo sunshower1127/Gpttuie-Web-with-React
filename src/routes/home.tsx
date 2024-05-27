@@ -4,13 +4,14 @@ import PostCard from "../components/postcard";
 import Timeline from "../components/timeline";
 import myTheme from "../constants/myTheme";
 import useRefresh from "../hooks/useRefresh";
+import RefreshBtn from "../components/refresh-btn";
 
 export default function Home() {
   const { isRefreshing, LoadingIndicator } = useRefresh();
   return (
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
-      <RefreshBtn onClick={() => window.location.reload()}>⟳</RefreshBtn>
+      <RefreshBtn />
       <Title>GPTTUIE</Title>
       <Menu>
         <Link to="/profile">Profile</Link>
@@ -53,15 +54,4 @@ const Menu = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
-`;
-
-const RefreshBtn = styled.button`
-  position: fixed;
-  top: 0.5rem;
-  right: 0.5rem;
-  font-size: 2rem;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: ${myTheme.colors.primary};
 `;

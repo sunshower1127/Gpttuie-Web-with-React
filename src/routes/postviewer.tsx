@@ -56,7 +56,7 @@ export default function PostViewer() {
           content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTzYCcyDc3f0J6j3KVFhOFgoU9OxvIWH5gvQ&usqp=CAU"
         />
       </Helmet>
-      <BackBtn onClick={() => navigate(-1)}>🔙</BackBtn>
+      <BackBtn onClick={() => navigate(-1)}>◀ 뒤로가기</BackBtn>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : post === null ? (
@@ -75,7 +75,7 @@ export default function PostViewer() {
             <DownloadBtn recipe={post?.recipe} />
             <ShareBtn title={post?.title} id={id} username={post?.username} />
             {auth.currentUser?.uid === post?.userId && (
-              <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
+              <DeleteBtn onClick={handleDeleteBtn}>게시물 삭제</DeleteBtn>
             )}
           </BtnWrapper>
           {id && <CommentViewer id={id} comments={post?.comments} />}
@@ -91,6 +91,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   background-color: ${myTheme.colors.background};
   padding: 10px;
+  max-width: 768px;
 `;
 
 const PostWrapper = styled.div`
@@ -125,13 +126,12 @@ const Body = styled.p`
 `;
 
 const DeleteBtn = styled.button`
-  font-size: 18px;
-  font-weight: bold;
-  padding: 10px;
-  background-color: red;
+  background-color: ${myTheme.colors.error};
+  padding: 10px 0;
+  width: 6rem;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   :hover {
     opacity: 0.8;
@@ -139,11 +139,10 @@ const DeleteBtn = styled.button`
 `;
 
 const BackBtn = styled.button`
-  font-size: 1rem;
   padding-bottom: 0.2rem;
-  color: white;
   background-color: transparent;
   border-radius: 4px;
+  border-width: 0;
   cursor: pointer;
   :hover {
     opacity: 0.8;

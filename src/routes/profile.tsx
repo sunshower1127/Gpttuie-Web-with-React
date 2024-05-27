@@ -13,6 +13,8 @@ import {
 import PostCard from "../components/postcard";
 import { Link, useNavigate } from "react-router-dom";
 import useRefresh from "../hooks/useRefresh";
+import RefreshBtn from "../components/refresh-btn";
+import myTheme from "../constants/myTheme";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -61,6 +63,7 @@ export default function Profile() {
   return (
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
+      <RefreshBtn />
       <Title>Profile</Title>
       <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
       <OnlyMobile>
@@ -74,6 +77,9 @@ export default function Profile() {
           image={post.photo}
           title={post.title}
           author={post.username}
+          body={post.body}
+          rating={post.recipe.rating}
+          review={post.recipe.oneLineReview}
         />
       ))}
     </Wrapper>
@@ -85,6 +91,7 @@ const Wrapper = styled.div`
   gap: 10px;
   flex-direction: column;
   align-items: center;
+  background-color: ${myTheme.colors.background};
 `;
 
 const LogoutBtn = styled.button`

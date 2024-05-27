@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import myTheme from "../constants/myTheme";
 
 export default function ShareBtn({
   id,
@@ -20,7 +19,7 @@ export default function ShareBtn({
     } else {
     }
   };
-  return <Btn onClick={handleClick}>포스트 공유</Btn>;
+  return <Btn onClick={handleClick}>게시물 공유</Btn>;
 }
 
 const Btn = styled.button`
