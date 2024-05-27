@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PostCard from "../components/postcard";
 import Timeline from "../components/timeline";
-import { Link } from "react-router-dom";
-import useRefresh from "../hooks/useRefresh";
 import myTheme from "../constants/myTheme";
+import useRefresh from "../hooks/useRefresh";
 
 export default function Home() {
   const { isRefreshing, LoadingIndicator } = useRefresh();
   return (
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
+      <RefreshBtn onClick={() => window.location.reload()}>⟳</RefreshBtn>
       <Title>GPTTUIE</Title>
       <Menu>
         <Link to="/profile">Profile</Link>
@@ -53,4 +54,15 @@ const Menu = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const RefreshBtn = styled.button`
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: ${myTheme.colors.primary};
 `;
