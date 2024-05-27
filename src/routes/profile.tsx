@@ -63,7 +63,9 @@ export default function Profile() {
       {isRefreshing && <LoadingIndicator />}
       <Title>Profile</Title>
       <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
-      <Link to="/">Home</Link>
+      <OnlyMobile>
+        <Link to="/">Home</Link>
+      </OnlyMobile>
       <Text>{user?.displayName}님이 쓴 글</Text>
       {posts.map((post) => (
         <PostCard
@@ -108,4 +110,10 @@ const Title = styled.h1`
 const Text = styled.p`
   font-size: 1.5rem;
   margin-bottom: 1rem;
+`;
+
+const OnlyMobile = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
