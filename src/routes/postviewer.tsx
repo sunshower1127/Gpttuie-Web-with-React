@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import DownloadBtn from "../components/download-btn";
 import RecipeViewer from "../components/recipeviewer";
 import CommentViewer from "../components/comment-viewer";
+import myTheme from "../constants/myTheme";
 
 export default function PostViewer() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ export default function PostViewer() {
           content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTzYCcyDc3f0J6j3KVFhOFgoU9OxvIWH5gvQ&usqp=CAU"
         />
       </Helmet>
-      <BackBtn onClick={() => navigate(-1)}>Back</BackBtn>
+      <BackBtn onClick={() => navigate(-1)}>🔙</BackBtn>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : post === null ? (
@@ -64,15 +65,19 @@ export default function PostViewer() {
         <PostWrapper>
           <Title>{post?.title}</Title>
           <Author>By {post?.username}</Author>
-
+          <HR />
           <Image src={post?.photo} alt={post?.title} />
           <Body>{post?.body}</Body>
+          <HR />
           <RecipeViewer recipe={post?.recipe} />
-          <DownloadBtn recipe={post?.recipe} />
-          <ShareBtn title={post?.title} id={id} username={post?.username} />
-          {auth.currentUser?.uid === post?.userId && (
-            <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
-          )}
+          <HR />
+          <BtnWrapper>
+            <DownloadBtn recipe={post?.recipe} />
+            <ShareBtn title={post?.title} id={id} username={post?.username} />
+            {auth.currentUser?.uid === post?.userId && (
+              <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
+            )}
+          </BtnWrapper>
           {id && <CommentViewer id={id} comments={post?.comments} />}
         </PostWrapper>
       )}
@@ -84,11 +89,13 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+  background-color: ${myTheme.colors.background};
+  padding: 10px;
 `;
 
 const PostWrapper = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-direction: column;
 `;
 
@@ -99,13 +106,12 @@ const Text = styled.p`
 `;
 
 const Title = styled.h1`
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: bold;
 `;
 
 const Author = styled.p`
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 1rem;
 `;
 
 const Image = styled.img`
@@ -133,15 +139,28 @@ const DeleteBtn = styled.button`
 `;
 
 const BackBtn = styled.button`
-  font-size: 18px;
-  font-weight: bold;
-  padding: 10px;
-  background-color: #333;
+  font-size: 1rem;
+  padding-bottom: 0.2rem;
   color: white;
-  border: none;
+  background-color: transparent;
   border-radius: 4px;
   cursor: pointer;
   :hover {
     opacity: 0.8;
   }
+  width: fit-content;
+  height: fit-content;
+`;
+
+const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`;
+
+const HR = styled.hr`
+  border: 1px solid ${myTheme.colors.outline};
+  margin: 10px 0;
+  width: 100%;
 `;

@@ -51,8 +51,8 @@ const CardWrapper = styled.div`
   background-color: ${myTheme.colors.surface};
   border-radius: 10px;
   overflow: hidden;
-  width: 100%;
-  margin: 6px 1rem;
+  width: 320px;
+  margin: 1rem;
   cursor: pointer;
   :hover {
     opacity: 0.8;

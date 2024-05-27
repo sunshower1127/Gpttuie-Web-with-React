@@ -28,7 +28,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 100%;
   background-color: ${myTheme.colors.background};
 `;
 
@@ -58,8 +57,8 @@ const Menu = styled.div`
 
 const RefreshBtn = styled.button`
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
   font-size: 2rem;
   background-color: transparent;
   border: none;

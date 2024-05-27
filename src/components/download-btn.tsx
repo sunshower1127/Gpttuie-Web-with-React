@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Recipe } from "./recipe";
+import myTheme from "../constants/myTheme";
 
 export default function DownloadBtn({
   recipe,
@@ -11,13 +12,13 @@ export default function DownloadBtn({
       JSON.stringify({ name: "Recipe", data: recipe })
     );
   };
-  return <Btn onClick={handleClick}>Download</Btn>;
+  return <Btn onClick={handleClick}>레시피 저장</Btn>;
 }
 
 const Btn = styled.button`
-  padding: 10px 20px;
-  margin-top: 10px;
-  background-color: #007bff;
+  padding: 10px 0;
+  width: 6rem;
+  background-color: ${myTheme.colors.primary};
   color: white;
   border: none;
   border-radius: 5px;

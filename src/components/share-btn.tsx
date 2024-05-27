@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import myTheme from "../constants/myTheme";
 
 export default function ShareBtn({
   id,
@@ -17,21 +18,17 @@ export default function ShareBtn({
         url: `https://gpttuie.web.app/recipes/${id}`,
       });
     } else {
-        
     }
   };
-  return <Btn onClick={handleClick}>Share</Btn>;
+  return <Btn onClick={handleClick}>포스트 공유</Btn>;
 }
 
 const Btn = styled.button`
-  background-color: #4caf50;
+  background-color: tomato;
   border: none;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  padding: 10px 0;
+  border-radius: 5px;
+  width: 6rem;
   cursor: pointer;
 `;

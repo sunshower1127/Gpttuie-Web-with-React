@@ -3,6 +3,7 @@ import { IComment } from "./comment";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { useState } from "react";
+import myTheme from "../constants/myTheme";
 
 export default function CommentViewer({
   id,
@@ -70,7 +71,7 @@ export default function CommentViewer({
       </CommentList>
       <CommentForm onSubmit={handleSubmit}>
         <Input
-          placeholder="Write a comment"
+          placeholder="댓글을 써주세요!"
           name="comment"
           value={body}
           onChange={onChange}
@@ -110,7 +111,7 @@ const CommentInnerWrapper = styled.div`
 
 const DeleteBtn = styled.button`
   padding: 5px 10px;
-  background-color: #ff0000;
+  background-color: ${myTheme.colors.error};
   color: white;
   border: none;
   cursor: pointer;
@@ -140,7 +141,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 5px 10px;
-  background-color: #008cba;
+  background-color: ${myTheme.colors.tertiary};
   color: white;
   border: none;
   cursor: pointer;
