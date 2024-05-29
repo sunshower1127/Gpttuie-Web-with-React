@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import myTheme from "../constants/myTheme";
-import logo from "../assets/images/logo.png";
+import defaultImg from "../assets/images/default.png";
 
 export default function PostCard({
   image,
@@ -27,7 +27,7 @@ export default function PostCard({
 
   return (
     <CardWrapper onClick={handleClick}>
-      {image ? <Image src={image} /> : <Image src={logo} />}
+      {image ? <Image src={image} /> : <Image src={defaultImg} />}
       <Content>
         <Title>{title}</Title>
         <Author>By {author}</Author>
@@ -63,7 +63,8 @@ const Image = styled.img`
   height: 120px;
   object-fit: cover;
   margin: 10px;
-  background-color: ${myTheme.colors.surface};
+  background-color: white;
+  border: 2px solid ${myTheme.colors.outline};
   border-radius: 10px;
 `;
 

@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../components/firebase";
 import { FirebaseError } from "firebase/app";
+import myTheme from "../constants/myTheme";
+import GoogleLoginBtn from "../components/google-login-btn";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -40,18 +42,19 @@ export default function Login() {
   return (
     <Wrapper>
       <Title>Login</Title>
+      <HR />
       <Form onSubmit={onSubmit}>
         <Input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="이메일"
           value={email}
           onChange={onChange}
         />
         <Input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="비밀번호"
           value={password}
           onChange={onChange}
         />
@@ -60,10 +63,11 @@ export default function Login() {
         </Button>
         {error && <Error>{error}</Error>}
         <Switcher>
-          <span>Don't have an account?</span>
-          <Link to="/create-account">Create one</Link>
+          <span>계정이 없나요?</span>
+          <Link to="/create-account">Sign up</Link>
         </Switcher>
       </Form>
+      <GoogleLoginBtn />
     </Wrapper>
   );
 }
@@ -72,13 +76,14 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  margin: 20px 0 10px 0;
+  color: ${myTheme.colors.primary};
+  text-align: center;
 `;
 
 const Form = styled.form`
@@ -89,35 +94,32 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
+  width: 60%;
+  height: 1.5rem;
   margin-bottom: 1rem;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 0.2rem;
 `;
 
 const Button = styled.button`
-  padding: 0.5rem;
-  width: 100%;
+  padding: 0.5rem 2rem;
+  background-color: ${myTheme.colors.primary};
+  color: white;
   border: none;
   border-radius: 4px;
-  background-color: #0070f3;
-  color: white;
   cursor: pointer;
+  margin-bottom: 1rem;
 `;
 
-const Error = styled.p`
+const Error = styled.span`
   color: red;
-  margin-top: 1rem;
 `;
 
 const Switcher = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  gap: 0.5rem;
+`;
 
-  a {
-    margin-left: 0.5rem;
-    color: #0070f3;
-  }
+const HR = styled.hr`
+  width: 80%;
+  margin-bottom: 1rem;
 `;

@@ -3,12 +3,12 @@ import { auth, db } from "../components/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import styled from "styled-components";
 import { Recipe } from "../components/recipe";
+import myTheme from "../constants/myTheme";
 
 export default function CreatePost() {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
-  const [log, setLog] = useState<string>("");
 
   useEffect(() => {
     const handleMessage = async (event: any) => {
@@ -36,7 +36,7 @@ export default function CreatePost() {
         });
         window.ReactNativeWebView.postMessage("posted");
       } catch (error: any) {
-        setLog((cur) => cur + "\nError: " + error.message);
+        alert(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -79,27 +79,28 @@ export default function CreatePost() {
 
   return (
     <Wrapper>
-      <Title>Create Post</Title>
+      <Title>게시물 작성</Title>
+      <HR />
       <Form onSubmit={onSubmit}>
         <Input
           type="text"
           name="title"
-          placeholder="Title"
+          placeholder="제목"
           value={title}
           onChange={onChange}
         />
-        <Input
-          type="text"
+        <TextArea
           name="body"
-          placeholder="Body"
+          placeholder="글 내용을 입력해주세요."
           value={body}
-          onChange={onChange}
+          rows={20}
+          maxLength={600}
+          onChange={(e) => setBody(e.target.value)}
         />
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Create Post"}
+          {isLoading ? "Loading..." : "Post"}
         </Button>
       </Form>
-      <Log>{log}</Log>
     </Wrapper>
   );
 }
@@ -108,30 +109,51 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
 const Title = styled.h1`
   font-size: 1.5rem;
+  margin: 20px 0 10px 0;
+  color: ${myTheme.colors.primary};
+  text-align: center;
+`;
+
+const HR = styled.hr`
+  width: 80%;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  width: 80%;
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
+  width: 100%;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0.2rem;
 `;
 
 const Button = styled.button`
-  padding: 0.5rem;
-  background-color: #333;
-  color: #fff;
+  padding: 0.5rem 2rem;
+  background-color: ${myTheme.colors.primary};
+  color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  margin-top: 1rem;
 `;
 
-const Log = styled.div`
-  width: 200px;
+const TextArea = styled.textarea`
+  border: 1px solid gray;
+  padding: 0.5rem;
+  border-radius: 2px;
+  color: black;
+  background-color: white;
+  width: 100%;
+  resize: none;
 `;
