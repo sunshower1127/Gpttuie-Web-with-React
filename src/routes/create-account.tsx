@@ -46,7 +46,7 @@ export default function CreateAccount() {
 
   return (
     <Wrapper>
-      <Title>새 계정 만들기</Title>
+      <Title>새 계정</Title>
       <HR />
       <Form onSubmit={onSubmit}>
         <Input
@@ -71,7 +71,7 @@ export default function CreateAccount() {
           onChange={onChange}
         />
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "계정 만들기"}
+          {isLoading ? "Loading..." : "Create Account"}
         </Button>
         {error && <Error>{error}</Error>}
       </Form>
@@ -89,6 +89,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 400px;
 `;
 
 const Title = styled.h1`

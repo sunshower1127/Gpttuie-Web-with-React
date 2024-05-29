@@ -41,7 +41,7 @@ export default function Login() {
 
   return (
     <Wrapper>
-      <Title>Login</Title>
+      <Title>로그인</Title>
       <HR />
       <Form onSubmit={onSubmit}>
         <Input
@@ -77,6 +77,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  max-width: 400px;
 `;
 
 const Title = styled.h1`
