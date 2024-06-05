@@ -73,7 +73,7 @@ export default function PostViewer() {
           <HR />
           <BtnWrapper>
             <DownloadBtn recipe={post?.recipe} />
-            <ShareBtn title={post?.title} id={id} username={post?.username} />
+            <ShareBtn id={id} />
             {auth.currentUser?.uid === post?.userId && (
               <DeleteBtn onClick={handleDeleteBtn}>Delete</DeleteBtn>
             )}
