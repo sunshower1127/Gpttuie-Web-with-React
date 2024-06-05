@@ -66,10 +66,11 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-  background-color: ${myTheme.colors.surface};
+  background-color: ${myTheme.colors.background};
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  background-color: ${myTheme.colors.background};
 `;

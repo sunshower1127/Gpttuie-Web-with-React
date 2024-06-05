@@ -14,7 +14,7 @@ export default function ShareBtn({ id }: { id: any }) {
       });
     }
   };
-  return <Btn onClick={handleClick}>포스트 공유</Btn>;
+  return <Btn onClick={handleClick}>게시물 공유</Btn>;
 }
 
 const Btn = styled.button`
