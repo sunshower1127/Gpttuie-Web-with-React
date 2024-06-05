@@ -27,7 +27,7 @@ export default function ProtectedRoute({
   }
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: path }} />;
+    return <Navigate to={`/login?from=${path}`} />;
   }
 
   return children;

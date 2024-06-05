@@ -95,18 +95,13 @@ const Wrapper = styled.div`
 `;
 
 const LogoutBtn = styled.button`
-  font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
-  background-color: #333;
+  background-color: #777;
   color: white;
   cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: #555;
-  }
+  height: 2rem;
 `;
 
 const Title = styled.h1`

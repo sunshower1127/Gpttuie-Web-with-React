@@ -8,7 +8,7 @@ import {
 import { auth } from "./firebase";
 import { useNavigate } from "react-router-dom";
 
-export default function GoogleLoginBtn() {
+export default function GoogleLoginBtn({ from }: { from: string }) {
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
@@ -17,7 +17,7 @@ export default function GoogleLoginBtn() {
       await updateProfile(result.user, {
         displayName: result.user.displayName,
       });
-      navigate("/profile");
+      navigate("/" + from, { replace: true });
     } catch (error) {
       alert("구글 로그인에 실패했습니다.");
     }

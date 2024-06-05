@@ -1,7 +1,7 @@
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../components/firebase";
 import myTheme from "../constants/myTheme";
@@ -9,11 +9,13 @@ import GoogleLoginBtn from "../components/google-login-btn";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const from = location.search.split("=")[1] || "";
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "name") {
       setName(e.target.value);
@@ -36,7 +38,7 @@ export default function CreateAccount() {
         password
       );
       await updateProfile(credentials.user, { displayName: name });
-      navigate("/profile");
+      navigate("/" + from, { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) setError(error.message);
     } finally {
@@ -79,7 +81,7 @@ export default function CreateAccount() {
         <span>이미 계정이 있으신가요?</span>
         <Link to="/login">Login</Link>
       </Switcher>
-      <GoogleLoginBtn />
+      <GoogleLoginBtn from={from} />
     </Wrapper>
   );
 }

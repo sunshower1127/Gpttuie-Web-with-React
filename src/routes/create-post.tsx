@@ -23,7 +23,6 @@ export default function CreatePost() {
       const user = auth.currentUser;
       if (!user) return;
       try {
-        setIsLoading(true);
         /*const doc = */ await addDoc(collection(db, "posts"), {
           title,
           body,
@@ -73,35 +72,41 @@ export default function CreatePost() {
       alert("제목과 내용을 입력해주세요.");
       return;
     }
-
+    setIsLoading(true);
     window.ReactNativeWebView.postMessage("submit");
   };
 
   return (
-    <Wrapper>
-      <Title>게시물 작성</Title>
-      <HR />
-      <Form onSubmit={onSubmit}>
-        <Input
-          type="text"
-          name="title"
-          placeholder="제목"
-          value={title}
-          onChange={onChange}
-        />
-        <TextArea
-          name="body"
-          placeholder="글 내용을 입력해주세요."
-          value={body}
-          rows={20}
-          maxLength={600}
-          onChange={(e) => setBody(e.target.value)}
-        />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Post"}
-        </Button>
-      </Form>
-    </Wrapper>
+    <>
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
+        <Wrapper>
+          <Title>게시물 작성</Title>
+          <HR />
+          <Form onSubmit={onSubmit}>
+            <Input
+              type="text"
+              name="title"
+              placeholder="제목"
+              value={title}
+              onChange={onChange}
+            />
+            <TextArea
+              name="body"
+              placeholder="글 내용을 입력해주세요."
+              value={body}
+              rows={20}
+              maxLength={600}
+              onChange={(e) => setBody(e.target.value)}
+            />
+            <Button type="submit" disabled={isLoading}>
+              글 쓰기
+            </Button>
+          </Form>
+        </Wrapper>
+      )}{" "}
+    </>
   );
 }
 
@@ -156,4 +161,40 @@ const TextArea = styled.textarea`
   background-color: white;
   width: 100%;
   resize: none;
+`;
+
+const LoadingIndicator = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-top: 100px;
+  justify-content: center;
+  align-items: center;
+
+  &:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 120px solid gray;
+    border-color: gray transparent gray transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+
+  @keyframes lds-hourglass {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
 `;

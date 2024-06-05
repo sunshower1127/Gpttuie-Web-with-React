@@ -1,11 +1,11 @@
+import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../components/firebase";
-import { FirebaseError } from "firebase/app";
-import myTheme from "../constants/myTheme";
 import GoogleLoginBtn from "../components/google-login-btn";
+import myTheme from "../constants/myTheme";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const from = location.search.split("=")[1] || "";
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "email") {
@@ -30,7 +31,8 @@ export default function Login() {
     try {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate(location.state?.from || "/profile", { replace: true });
+      const from = location.search.split("=")[1] || "";
+      navigate("/" + from, { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) setError(error.message);
     } finally {
@@ -64,10 +66,10 @@ export default function Login() {
         {error && <Error>{error}</Error>}
         <Switcher>
           <span>계정이 없나요?</span>
-          <Link to="/create-account">Sign up</Link>
+          <Link to={`/create-account?from=${from}`}>Sign up</Link>
         </Switcher>
       </Form>
-      <GoogleLoginBtn />
+      <GoogleLoginBtn from={from} />
     </Wrapper>
   );
 }
