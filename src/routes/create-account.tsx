@@ -79,7 +79,7 @@ export default function CreateAccount() {
       </Form>
       <Switcher>
         <span>이미 계정이 있으신가요?</span>
-        <Link to="/login">Login</Link>
+        <Link to={`/login?from=${from}`}>Login</Link>
       </Switcher>
       <GoogleLoginBtn from={from} />
     </Wrapper>
