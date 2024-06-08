@@ -29,5 +29,7 @@ const Btn = styled.button`
   border: none;
   font-family: "Pretendard";
   border-bottom: 2px solid tomato;
+  font-size: 1rem;
+  height: 2.7rem;
   cursor: pointer;
 `;

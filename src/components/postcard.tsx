@@ -72,22 +72,22 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: ${myTheme.colors.primary};
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 텍스트를 3줄로 제한 */
+  -webkit-line-clamp: 2; /* 텍스트를 3줄로 제한 */
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
 
 const Author = styled.div`
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: ${myTheme.colors.secondary};
 `;
 
 const Body = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: ${myTheme.colors.onSecondaryContainer};
   margin-top: 0.5rem;
   display: -webkit-box;
@@ -98,7 +98,7 @@ const Body = styled.p`
 
 const Review = styled.div`
   margin-top: 0.5rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: ${myTheme.colors.secondary};
   display: -webkit-box;
   -webkit-line-clamp: 1; /* 텍스트를 3줄로 제한 */

@@ -5,6 +5,7 @@ import { auth, db } from "./firebase";
 import { useState } from "react";
 import myTheme from "../constants/myTheme";
 import { FaComment } from "react-icons/fa";
+import { TiDeleteOutline } from "react-icons/ti";
 
 export default function CommentViewer({
   id,
@@ -63,7 +64,9 @@ export default function CommentViewer({
               <Body>{comment.body}</Body>
             </CommentInnerWrapper>
             {user?.uid === comment.userId && (
-              <DeleteBtn onClick={() => handleDeleteBtn(index)}>X</DeleteBtn>
+              <DeleteBtn onClick={() => handleDeleteBtn(index)}>
+                <TiDeleteOutline />
+              </DeleteBtn>
             )}
           </Comment>
         ))}
@@ -101,6 +104,8 @@ const Comment = styled.div`
   margin-bottom: 10px;
   border: 1px solid #ccc;
   padding: 10px;
+  padding-bottom: 0;
+  padding-right: 0;
   border-radius: 5px;
 `;
 
@@ -111,21 +116,21 @@ const CommentInnerWrapper = styled.div`
 `;
 
 const DeleteBtn = styled.button`
-  padding: 5px 10px;
-  background-color: ${myTheme.colors.error};
-  color: white;
+  background-color: transparent;
+  color: gray;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  font-size: 2rem;
 `;
 
-const Author = styled.span`
+const Author = styled.div`
+  font-size: 0.8rem;
   font-weight: bold;
   margin-bottom: 5px;
 `;
 
 const Body = styled.span`
-  font-size: 14px;
+  font-size: 0.8rem;
 `;
 
 const CommentForm = styled.form`
@@ -149,8 +154,4 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 5px;
-
-  &:hover {
-    background-color: #0079a1;
-  }
 `;

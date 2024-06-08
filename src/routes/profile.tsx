@@ -99,7 +99,7 @@ const Wrapper = styled.div`
 const LogoutBtn = styled.button`
   border: none;
   background-color: transparent;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-family: "Pretendard";
 `;
 

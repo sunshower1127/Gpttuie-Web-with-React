@@ -28,6 +28,8 @@ const Btn = styled.button`
   font-family: "Pretendard";
   border-bottom: 2px solid ${myTheme.colors.primary};
   cursor: pointer;
+  font-size: 1rem;
+  height: 2.7rem;
   @media (max-width: 768px) {
     display: none;
   }
