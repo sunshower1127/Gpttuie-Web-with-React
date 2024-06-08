@@ -50,7 +50,7 @@ const Input = styled.input`
   border-radius: 0;
   border-bottom: 1px solid ${myTheme.colors.primary};
   font-family: "Pretendard";
-  font-size: 1rem;
+  font-size: 0.8rem;
 `;
 
 const Button = styled.button`

@@ -125,7 +125,7 @@ const Title = styled.h1`
   text-align: center;
   margin-top: -0.4rem;
   margin-bottom: 0.4rem;
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     color: white;
   }
 `;
