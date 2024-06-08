@@ -7,18 +7,16 @@ export default function RefreshBtn() {
 
 const Btn = styled.button`
   position: fixed;
-  top: 0.5rem;
-  left: 0.5rem;
+  bottom: 4px;
+  left: 4px;
   font-size: 2rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: white;
-  background-color: ${myTheme.colors.primary};
-  opacity: 0.7;
-  border-radius: 6px;
+  color: ${myTheme.colors.primary};
+  border-radius: 16px;
   border-width: 0;
-  padding: 3px 6px 0 9px;
+  padding: 0 0 10px 5px;
 
   @media (min-width: 768px) {
     display: none;

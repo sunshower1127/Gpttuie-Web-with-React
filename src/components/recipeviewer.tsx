@@ -9,7 +9,7 @@ export default function RecipeViewer({
   if (!recipe) return null;
   return (
     <Wrapper>
-      <Title>레시피</Title>
+      <Title style={{ marginTop: 0 }}>레시피</Title>
       <Text>
         {recipe.title} {recipe.servingSize}인분
       </Text>
@@ -24,14 +24,18 @@ export default function RecipeViewer({
       <List>
         {recipe.steps.map((step, index) => (
           <Item key={index}>
-            {step.image && <Image src={step.image} alt="No Image" />}
             {step.description && <Text>{step.description}</Text>}
+            {step.image && <Image src={step.image} alt="No Image" />}
             {step.timer && <Text>시간 : {step.timer}</Text>}
           </Item>
         ))}
       </List>
-      {recipe.rating && <Text>별점 : {recipe.rating}</Text>}
-      {recipe.oneLineReview && <Text>한줄 평가 : {recipe.oneLineReview}</Text>}
+      {recipe.rating !== undefined && recipe.rating !== null && (
+        <Text>별점 : {recipe.rating}</Text>
+      )}
+      {recipe.oneLineReview !== undefined && recipe.oneLineReview !== null && (
+        <Text>한줄 평가 : {recipe.oneLineReview}</Text>
+      )}
     </Wrapper>
   );
 }
@@ -40,20 +44,19 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: #f8f8f8;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 `;
 
 const Title = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-  margin-top: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
 `;
 
 const Text = styled.p`
   font-size: 16px;
-  color: #666;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 `;
 
 const List = styled.ul`

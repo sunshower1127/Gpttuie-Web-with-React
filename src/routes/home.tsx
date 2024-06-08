@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PostCard from "../components/postcard";
+import RefreshBtn from "../components/refresh-btn";
 import Timeline from "../components/timeline";
 import myTheme from "../constants/myTheme";
 import useRefresh from "../hooks/useRefresh";
-import RefreshBtn from "../components/refresh-btn";
 
 export default function Home() {
   const { isRefreshing, LoadingIndicator } = useRefresh();
@@ -17,7 +17,16 @@ export default function Home() {
         <Link to="/profile">Profile</Link>
       </Menu>
       <SubTitle>에디터가 직접고른! 오늘의 레시피</SubTitle>
-      <PostCard title="김치찌개" author="에디터" id="has no id" />
+      <PostCard
+        title="순두부 신라면"
+        author="에디터"
+        id="has no id"
+        body="한 층 업그레이드 된 순두부 신라면 레시피!"
+        rating={5}
+        review={"강력추천!"}
+        image="https://i.ytimg.com/vi/4mEb8ELpahw/maxresdefault.jpg"
+      />
+      <HR />
       <SubTitle>최신 요리 후기</SubTitle>
       <Timeline />
     </Wrapper>
@@ -28,8 +37,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
   background-color: ${myTheme.colors.background};
+  padding: 0.5rem;
 `;
 
 const Title = styled.h1`
@@ -42,9 +51,10 @@ const Title = styled.h1`
 
 const SubTitle = styled.h2`
   margin-top: 2rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: ${myTheme.colors.primary};
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: ${myTheme.colors.onSecondaryContainer};
 `;
 
 const Menu = styled.div`
@@ -54,4 +64,8 @@ const Menu = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const HR = styled.hr`
+  width: 90%;
 `;

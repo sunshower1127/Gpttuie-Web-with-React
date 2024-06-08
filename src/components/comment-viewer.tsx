@@ -4,6 +4,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { useState } from "react";
 import myTheme from "../constants/myTheme";
+import { FaComment } from "react-icons/fa";
 
 export default function CommentViewer({
   id,
@@ -74,7 +75,9 @@ export default function CommentViewer({
           value={body}
           onChange={onChange}
         />
-        <Button>Send</Button>
+        <Button>
+          <FaComment />
+        </Button>
       </CommentForm>
     </Wrapper>
   );
@@ -135,10 +138,12 @@ const Input = styled.input`
   flex-grow: 1;
   margin-right: 10px;
   padding: 5px;
+  font-family: "Pretendard";
 `;
 
 const Button = styled.button`
-  padding: 5px 10px;
+  padding: 8px 10px;
+  padding-bottom: 5px;
   background-color: ${myTheme.colors.tertiary};
   color: white;
   border: none;

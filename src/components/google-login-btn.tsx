@@ -27,4 +27,5 @@ export default function GoogleLoginBtn({ from }: { from: string }) {
 
 const Img = styled.img`
   margin-top: 20px;
+  width: 160px;
 `;

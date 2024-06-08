@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import myTheme from "../constants/myTheme";
+import { GoSearch } from "react-icons/go";
 
 export default function SearchBar({
   onSearch,
@@ -22,7 +23,9 @@ export default function SearchBar({
         onChange={(e: any) => setSearch(e.target.value)}
         placeholder="검색어를 입력해주세요!"
       />
-      <Button type="submit">검색</Button>
+      <Button type="submit">
+        <GoSearch size={"1.3rem"} color={myTheme.colors.primary} />
+      </Button>
     </Form>
   );
 }
@@ -32,26 +35,24 @@ const Form = styled.form`
   margin-bottom: 20px;
   align-items: center;
   background-color: transparent;
+  width: 80%;
+  margin-left: 6%;
 `;
 
 const Input = styled.input`
-  padding: 10px 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px 10px;
+  background-color: #f5f5f5;
   flex: 1;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid ${myTheme.colors.primary};
 `;
 
 const Button = styled.button`
-  padding: 0 10px;
-  height: 2rem;
+  background-color: transparent;
   margin-left: 10px;
-  background-color: ${myTheme.colors.primary};
-  color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
+  margin-top: 3px;
 `;

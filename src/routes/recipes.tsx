@@ -18,9 +18,9 @@ export default function Recipes() {
 }
 
 const Wrapper = styled.div`
-  margin: 0 auto;
-  padding: 20px;
-  background-color: ${myTheme.colors.background};
-  align-items: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: ${myTheme.colors.background};
+  padding: 0.5rem;
 `;

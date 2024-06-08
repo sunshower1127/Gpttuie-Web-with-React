@@ -10,6 +10,7 @@ import Profile from "./routes/profile";
 import Recipes from "./routes/recipes";
 import PostViewer from "./routes/postviewer";
 import myTheme from "./constants/myTheme";
+import "./assets/fonts/pretendard/static/pretendard.css";
 
 const router = createBrowserRouter([
   {
@@ -63,14 +64,11 @@ export default function App() {
 const GlobalStyles = createGlobalStyle`
   ${reset}
   box-sizing: border-box;
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  background-color: ${myTheme.colors.background};
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${myTheme.colors.background};
+  font-family: "Pretendard";
 `;

@@ -38,7 +38,6 @@ export default function Login() {
     } finally {
       setIsLoading(false);
     }
-    setIsLoading(true);
   };
 
   return (
@@ -102,16 +101,18 @@ const Input = styled.input`
   height: 1.5rem;
   margin-bottom: 1rem;
   padding: 0.2rem;
+  font-family: "Pretendard";
 `;
 
 const Button = styled.button`
-  padding: 0.5rem 2rem;
+  padding: 0.3rem 2rem;
   background-color: ${myTheme.colors.primary};
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 1rem;
+  font-family: "Pretendard";
 `;
 
 const Error = styled.span`

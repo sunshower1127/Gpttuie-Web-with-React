@@ -1,3 +1,4 @@
+import { FaShareAlt } from "react-icons/fa";
 import styled from "styled-components";
 
 export default function ShareBtn({ id }: { id: any }) {
@@ -14,15 +15,19 @@ export default function ShareBtn({ id }: { id: any }) {
       });
     }
   };
-  return <Btn onClick={handleClick}>게시물 공유</Btn>;
+  return (
+    <Btn onClick={handleClick}>
+      <FaShareAlt color="tomato" />
+      &nbsp; 게시물 공유
+    </Btn>
+  );
 }
 
 const Btn = styled.button`
-  background-color: tomato;
+  padding: 0.5rem 0.2rem;
+  background-color: transparent;
   border: none;
-  color: white;
-  padding: 10px 0;
-  border-radius: 5px;
-  width: 6rem;
+  font-family: "Pretendard";
+  border-bottom: 2px solid tomato;
   cursor: pointer;
 `;

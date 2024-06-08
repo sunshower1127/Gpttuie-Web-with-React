@@ -64,12 +64,12 @@ export default function Profile() {
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
       <RefreshBtn />
-      <Title>Profile</Title>
-      <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
       <OnlyMobile>
+        <Title>Profile</Title>
         <Link to="/">Home</Link>
       </OnlyMobile>
       <Text>{user?.displayName}님이 쓴 글</Text>
+      {posts.length === 0 && <Error>아직 작성한 글이 없어요.</Error>}
       {posts.map((post) => (
         <PostCard
           key={post.id}
@@ -82,6 +82,8 @@ export default function Profile() {
           review={post.recipe.oneLineReview}
         />
       ))}
+      <HR />
+      <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
     </Wrapper>
   );
 }
@@ -95,22 +97,20 @@ const Wrapper = styled.div`
 `;
 
 const LogoutBtn = styled.button`
-  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  height: 2rem;
+  background-color: transparent;
+  font-size: 0.8rem;
+  font-family: "Pretendard";
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 `;
 
 const Text = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
 `;
 
@@ -118,4 +118,13 @@ const OnlyMobile = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const HR = styled.hr`
+  width: 90%;
+`;
+
+const Error = styled.div`
+  text-align: center;
+  margin-top: 1rem;
 `;

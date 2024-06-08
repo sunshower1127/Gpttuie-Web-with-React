@@ -101,7 +101,7 @@ export default function CreatePost() {
               onChange={(e) => setBody(e.target.value)}
             />
             <Button type="submit" disabled={isLoading}>
-              글 쓰기
+              글쓰기
             </Button>
           </Form>
         </Wrapper>
@@ -123,6 +123,7 @@ const Title = styled.h1`
   margin: 20px 0 10px 0;
   color: ${myTheme.colors.primary};
   text-align: center;
+  font-family: "Pretendard";
 `;
 
 const HR = styled.hr`
@@ -140,7 +141,8 @@ const Input = styled.input`
   width: 100%;
   height: 1.5rem;
   margin-bottom: 1rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
+  font-family: "Pretendard";
 `;
 
 const Button = styled.button`
@@ -151,6 +153,7 @@ const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
+  font-family: "Pretendard";
 `;
 
 const TextArea = styled.textarea`
@@ -161,6 +164,7 @@ const TextArea = styled.textarea`
   background-color: white;
   width: 100%;
   resize: none;
+  font-family: "Pretendard";
 `;
 
 const LoadingIndicator = styled.div`
@@ -179,8 +183,9 @@ const LoadingIndicator = styled.div`
     height: 0;
     margin: 8px;
     box-sizing: border-box;
-    border: 120px solid gray;
-    border-color: gray transparent gray transparent;
+    border: 120px solid ${myTheme.colors.primary};
+    border-color: ${myTheme.colors.primary} transparent
+      ${myTheme.colors.primary} transparent;
     animation: lds-hourglass 1.2s infinite;
   }
 

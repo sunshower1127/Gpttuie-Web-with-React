@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Recipe } from "./recipe";
 import myTheme from "../constants/myTheme";
+import { FaFileDownload } from "react-icons/fa";
 
 export default function DownloadBtn({
   recipe,
@@ -12,19 +13,22 @@ export default function DownloadBtn({
       JSON.stringify({ name: "Recipe", data: recipe })
     );
   };
-  return <Btn onClick={handleClick}>레시피 저장</Btn>;
+  return (
+    <Btn onClick={handleClick}>
+      <FaFileDownload color={myTheme.colors.primary} />
+      &nbsp; 레시피 저장
+    </Btn>
+  );
 }
 
 const Btn = styled.button`
-  padding: 10px 0;
-  width: 6rem;
-  background-color: ${myTheme.colors.primary};
-  color: white;
+  padding: 0.5rem 0.2rem;
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
+  font-family: "Pretendard";
+  border-bottom: 2px solid ${myTheme.colors.primary};
   cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;

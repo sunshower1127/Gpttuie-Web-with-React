@@ -1,13 +1,15 @@
 import { DocumentData, deleteDoc, doc, getDoc } from "firebase/firestore";
-import { useNavigate, useParams } from "react-router-dom";
-import { auth, db } from "../components/firebase";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import ShareBtn from "../components/share-btn";
 import { Helmet } from "react-helmet";
-import DownloadBtn from "../components/download-btn";
-import RecipeViewer from "../components/recipeviewer";
+import { FaBackspace } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 import CommentViewer from "../components/comment-viewer";
+import DownloadBtn from "../components/download-btn";
+import { auth, db } from "../components/firebase";
+import RecipeViewer from "../components/recipeviewer";
+import ShareBtn from "../components/share-btn";
 import myTheme from "../constants/myTheme";
 
 export default function PostViewer() {
@@ -46,9 +48,10 @@ export default function PostViewer() {
   return (
     <>
       <TopBar>
-        <BackBtn onClick={() => navigate(-1)}>◀ 뒤로가기</BackBtn>
+        <BackBtn onClick={() => navigate(-1)}>
+          <FaBackspace size="1.3rem" color={myTheme.colors.primary} />
+        </BackBtn>
         <Title>{post?.title}</Title>
-        <HR />
       </TopBar>
       <Wrapper>
         <Helmet>
@@ -70,18 +73,20 @@ export default function PostViewer() {
         ) : (
           <PostWrapper>
             <Title>{post?.title}</Title>
-            <Author>{post?.username}</Author>
+            <Author>글쓴이 {post?.username}</Author>
             <HR />
-            <Image src={post?.photo} alt={post?.title} />
+            {post?.photo && <Image src={post?.photo} alt={post?.title} />}
             <Body>{post?.body}</Body>
-            <HR />
             <RecipeViewer recipe={post?.recipe} />
             <HR />
             <BtnWrapper>
               <DownloadBtn recipe={post?.recipe} />
               <ShareBtn id={id} />
               {auth.currentUser?.uid === post?.userId && (
-                <DeleteBtn onClick={handleDeleteBtn}>게시물 삭제</DeleteBtn>
+                <DeleteBtn onClick={handleDeleteBtn}>
+                  <MdDeleteForever size="1rem" color={myTheme.colors.error} />
+                  &nbsp;게시물 삭제
+                </DeleteBtn>
               )}
             </BtnWrapper>
             {id && <CommentViewer id={id} comments={post?.comments} />}
@@ -116,34 +121,40 @@ const Text = styled.p`
 
 const Title = styled.h1`
   font-size: 1.3rem;
+  font-weight: 500;
   text-align: center;
+  margin-top: -0.4rem;
+  margin-bottom: 0.4rem;
 `;
 
 const Author = styled.p`
+  margin-top: 0.4rem;
   font-size: 1rem;
   text-align: right;
+  color: ${myTheme.colors.onSecondaryContainer};
 `;
 
 const Image = styled.img`
-  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 90%;
   height: auto;
+  align-self: center;
 `;
 
-const Body = styled.p`
+const Body = styled.div`
   font-size: 1rem;
+  margin-bottom: 1rem;
 `;
 
 const DeleteBtn = styled.button`
-  background-color: ${myTheme.colors.error};
-  padding: 10px 0;
-  width: 6rem;
-  color: white;
+  padding: 0.5rem 0.2rem;
+  padding-left: 0;
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
+  font-family: "Pretendard";
+  border-bottom: 2px solid ${myTheme.colors.error};
   cursor: pointer;
-  :hover {
-    opacity: 0.8;
-  }
 `;
 
 const TopBar = styled.div`
@@ -158,7 +169,8 @@ const TopBar = styled.div`
 `;
 
 const BackBtn = styled.button`
-  padding-bottom: 0.2rem;
+  padding-top: 10px;
+  padding-left: 10px;
   background-color: transparent;
   border-radius: 4px;
   border-width: 0;
