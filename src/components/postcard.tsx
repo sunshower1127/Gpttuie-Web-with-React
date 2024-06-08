@@ -82,6 +82,7 @@ const Title = styled.div`
 `;
 
 const Author = styled.div`
+  margin-top: 0.2rem;
   font-size: 0.8rem;
   color: ${myTheme.colors.secondary};
 `;

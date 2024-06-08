@@ -7,8 +7,8 @@ export default function RefreshBtn() {
 
 const Btn = styled.button`
   position: fixed;
-  bottom: 4px;
-  left: 4px;
+  bottom: 2px;
+  left: 2px;
   font-size: 3rem;
   background-color: transparent;
   border: none;

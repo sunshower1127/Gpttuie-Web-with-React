@@ -79,7 +79,7 @@ export default function CommentViewer({
           onChange={onChange}
         />
         <Button>
-          <FaComment />
+          <FaComment fontSize="1.5rem" />
         </Button>
       </CommentForm>
     </Wrapper>
@@ -101,6 +101,7 @@ const CommentList = styled.div`
 const Comment = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   padding: 10px;
@@ -144,6 +145,7 @@ const Input = styled.input`
   margin-right: 10px;
   padding: 5px;
   font-family: "Pretendard";
+  font-size: 0.9rem;
 `;
 
 const Button = styled.button`

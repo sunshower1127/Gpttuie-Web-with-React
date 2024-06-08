@@ -49,9 +49,9 @@ export default function PostViewer() {
     <>
       <TopBar>
         <BackBtn onClick={() => navigate(-1)}>
-          <FaBackspace size="2.5rem" color={myTheme.colors.primary} />
+          <FaBackspace size="2.0rem" color={myTheme.colors.primary} />
         </BackBtn>
-        <Title>{post?.title}</Title>
+        <TopTitle>{post?.title}</TopTitle>
       </TopBar>
       <Wrapper>
         <Helmet>
@@ -125,9 +125,17 @@ const Title = styled.h1`
   text-align: center;
   margin-top: -0.4rem;
   margin-bottom: 0.4rem;
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
     color: white;
   }
+`;
+
+const TopTitle = styled.h1`
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: -0.4rem;
+  margin-bottom: 0.4rem;
 `;
 
 const Author = styled.p`
@@ -159,6 +167,7 @@ const DeleteBtn = styled.button`
   border-bottom: 2px solid ${myTheme.colors.error};
   font-size: 1rem;
   height: 2.7rem;
+  color: black;
   cursor: pointer;
 `;
 

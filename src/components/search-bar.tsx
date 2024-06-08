@@ -24,13 +24,14 @@ export default function SearchBar({
         placeholder="검색어를 입력해주세요!"
       />
       <Button type="submit">
-        <GoSearch size={"1.3rem"} color={myTheme.colors.primary} />
+        <GoSearch size={"1.5rem"} color={myTheme.colors.primary} />
       </Button>
     </Form>
   );
 }
 
 const Form = styled.form`
+  margin-top: 20px;
   display: flex;
   margin-bottom: 20px;
   align-items: center;
@@ -40,16 +41,20 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  padding: 10px 10px;
+  padding: 5px 10px;
   background-color: #f5f5f5;
   flex: 1;
   border-top: none;
   border-left: none;
   border-right: none;
+  border-radius: 0;
   border-bottom: 1px solid ${myTheme.colors.primary};
+  font-family: "Pretendard";
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
+  flex: 0;
   background-color: transparent;
   margin-left: 10px;
   border: none;
