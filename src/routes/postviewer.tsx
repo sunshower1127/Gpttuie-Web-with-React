@@ -80,7 +80,9 @@ export default function PostViewer() {
             <RecipeViewer recipe={post?.recipe} />
             <HR />
             <BtnWrapper>
-              <DownloadBtn recipe={post?.recipe} />
+              {window.ReactNativeWebView && (
+                <DownloadBtn recipe={post?.recipe} />
+              )}
               <ShareBtn id={id} />
               {auth.currentUser?.uid === post?.userId && (
                 <DeleteBtn onClick={handleDeleteBtn}>
@@ -125,7 +127,7 @@ const Title = styled.h1`
   text-align: center;
   margin-top: -0.4rem;
   margin-bottom: 0.4rem;
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
     color: white;
   }
 `;

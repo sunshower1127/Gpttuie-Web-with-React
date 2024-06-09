@@ -31,7 +31,4 @@ const Btn = styled.button`
   font-size: 1rem;
   height: 2.7rem;
   color: black;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
