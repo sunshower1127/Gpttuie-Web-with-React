@@ -11,11 +11,17 @@ import Recipes from "./routes/recipes";
 import PostViewer from "./routes/postviewer";
 import myTheme from "./constants/myTheme";
 import "./assets/fonts/pretendard/static/pretendard.css";
+import { NavigationBar } from "./components/navbar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <>
+        <NavigationBar />
+        <Home />
+      </>
+    ),
   },
   {
     path: "/login",
@@ -38,13 +44,19 @@ const router = createBrowserRouter([
     path: "/profile",
     element: (
       <ProtectedRoute path="profile">
+        <NavigationBar />
         <Profile />
       </ProtectedRoute>
     ),
   },
   {
     path: "/recipes",
-    element: <Recipes />,
+    element: (
+      <>
+        <NavigationBar />
+        <Recipes />,
+      </>
+    ),
   },
   {
     path: "/recipes/:id",
@@ -71,4 +83,5 @@ const Wrapper = styled.div`
   justify-content: center;
   background-color: ${myTheme.colors.background};
   font-family: "Pretendard";
+  min-height: 100vh;
 `;

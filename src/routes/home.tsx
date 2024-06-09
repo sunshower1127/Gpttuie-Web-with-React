@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PostCard from "../components/postcard";
 import RefreshBtn from "../components/refresh-btn";
@@ -12,10 +11,7 @@ export default function Home() {
     <Wrapper>
       {isRefreshing && <LoadingIndicator />}
       <RefreshBtn />
-      <Title>GPTTUIE</Title>
-      <Menu>
-        <Link to="/profile">Profile</Link>
-      </Menu>
+
       <SubTitle>에디터가 직접고른! 오늘의 레시피</SubTitle>
       <PostCard
         title="순두부 신라면"
@@ -41,29 +37,12 @@ const Wrapper = styled.div`
   padding: 0.5rem;
 `;
 
-const Title = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
 const SubTitle = styled.h2`
   margin-top: 2rem;
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
   font-weight: 500;
   color: ${myTheme.colors.onSecondaryContainer};
-`;
-
-const Menu = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const HR = styled.hr`

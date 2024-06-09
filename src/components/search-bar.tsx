@@ -31,7 +31,7 @@ export default function SearchBar({
 }
 
 const Form = styled.form`
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   margin-bottom: 20px;
   align-items: center;

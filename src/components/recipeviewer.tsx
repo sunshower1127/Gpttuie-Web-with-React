@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Recipe } from "./recipe";
+import ReactMarkdown from "react-markdown";
 
 export default function RecipeViewer({
   recipe,
@@ -24,7 +25,21 @@ export default function RecipeViewer({
       <List>
         {recipe.steps.map((step, index) => (
           <Item key={index}>
-            {step.description && <Text>{step.description}</Text>}
+            {step.description && (
+              <ReactMarkdown
+                components={{
+                  p: ({ node, ...props }) => <Text {...props} />,
+                  strong: ({ node, ...props }) => (
+                    <strong {...props} style={{ fontWeight: "bold" }} />
+                  ),
+                  ol: ({ node, ...props }) => (
+                    <ol {...props} style={{ listStyleType: "decimal" }} />
+                  ),
+                }}
+              >
+                {step.description}
+              </ReactMarkdown>
+            )}
             {step.image && <Image src={step.image} alt="No Image" />}
             {step.timer && <Text>시간 : {step.timer}</Text>}
           </Item>
